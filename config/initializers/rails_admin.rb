@@ -47,6 +47,15 @@ RailsAdmin.config do |config|
     # end
   end
 
+  config.model 'Work' do
+    list do
+      field :name
+      field :url
+      field :uri
+      field :composer_uri
+    end
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
