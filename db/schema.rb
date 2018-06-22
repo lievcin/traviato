@@ -15,13 +15,6 @@ ActiveRecord::Schema.define(version: 20180622152313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cities_clean", id: false, force: :cascade do |t|
-    t.text "city"
-    t.text "country_name"
-    t.bigint "priority"
-    t.decimal "population"
-  end
-
   create_table "composers", force: :cascade do |t|
     t.string "name"
     t.string "gender"
@@ -32,21 +25,4 @@ ActiveRecord::Schema.define(version: 20180622152313) do
     t.string "country"
   end
 
-  create_table "countries", id: false, force: :cascade do |t|
-    t.text "name"
-    t.text "iso"
-    t.index ["iso"], name: "countries_iso_uindex", unique: true
-  end
-
-  create_table "worldcitiespop", id: false, force: :cascade do |t|
-    t.text "country"
-    t.text "city"
-    t.text "accentcity"
-    t.integer "region"
-    t.text "population"
-    t.decimal "latitude"
-    t.decimal "longitude"
-  end
-
-  add_foreign_key "worldcitiespop", "countries", column: "country", primary_key: "iso", name: "worldcitiespop_countries_iso_fk"
 end
