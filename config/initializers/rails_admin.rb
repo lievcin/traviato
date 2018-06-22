@@ -34,13 +34,10 @@ RailsAdmin.config do |config|
   config.model 'Composer' do
     list do
       field :name
-      field :other_names
-      field :missing_first_name
-      field :year_of_birth
-      field :year_of_death
-      field :place_of_birth
+      field :country
+      field :url
+      field :uri
       field :gender
-      field :bio      
     end
 
     # exclude_fields :content, :updated_at
@@ -49,9 +46,6 @@ RailsAdmin.config do |config|
     #   exclude_fields :author
     # end
   end
-
-
-
 
   config.actions do
     dashboard                     # mandatory
