@@ -56,6 +56,13 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Source' do
+    list do
+      field :name
+      field :comments
+    end
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
