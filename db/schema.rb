@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625085900) do
+ActiveRecord::Schema.define(version: 20180625124855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "composers", force: :cascade do |t|
     t.string "name"
@@ -23,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180625085900) do
     t.string "url"
     t.string "uri"
     t.string "country"
+    t.text "wikipedia_text"
+    t.text "aka"
   end
 
   create_table "listing_mappers", force: :cascade do |t|
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 20180625085900) do
     t.string "listing_composer"
     t.string "listing_work"
     t.string "work_uri"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "listings", force: :cascade do |t|
@@ -58,6 +61,8 @@ ActiveRecord::Schema.define(version: 20180625085900) do
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "composer_id"
+    t.text "wikipedia_text"
+    t.text "aka"
   end
 
 end
