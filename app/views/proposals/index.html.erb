@@ -1,0 +1,24 @@
+<h1 class="title is-3 has-text-white">Proposals for <%= @composer %> and <%= @work %></h1>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Composer</th>
+      <th>Result</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @results.each do |result| %>
+      <tr>
+				<td><%= result.composer.name %></td>
+				<td><%= result.name %></td>
+        <td>
+          <div class="btn btn-warning">
+              <%= link_to 'Create Mapping Key', listing_mappers_path(work_uri: result.uri, composer: @composer, work: @work, source_id: @source_id), method: :post, class: "btn" %>
+          </div>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

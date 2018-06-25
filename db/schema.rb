@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625124855) do
+ActiveRecord::Schema.define(version: 20180625143308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20180625124855) do
 
   create_table "listing_mappers", force: :cascade do |t|
     t.integer "source_id"
-    t.string "listing_composer"
-    t.string "listing_work"
+    t.string "composer"
+    t.string "work"
     t.string "work_uri"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false

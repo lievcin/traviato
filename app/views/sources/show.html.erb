@@ -1,0 +1,24 @@
+<h1 class="title is-3 has-text-white"><%= @source.name %></h1>
+
+<h3 class="title is-3 has-text-white">Unmapped listings</h1>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Composer</th>
+      <th>Work</th>
+      <th>Total Listings</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @listings.each do |listing| %>
+      <tr>
+				<td><%= listing["composer"] %></td>
+				<td><%= listing["work"] %></td>
+				<td class="text-right"><%= listing["count_entries"] %></td>
+        <td><%= link_to 'Get proposals', proposals_path(listing) %></td>
+      </td>
+    <%end%>
+  </tbody>
+</table>

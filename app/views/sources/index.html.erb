@@ -1,7 +1,7 @@
 <h1 class="title is-3 has-text-white">Listing sources</h1>
 
-<table class="table is-bordered">
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
       <th>Name</th>
       <th>Comments</th>
@@ -9,6 +9,10 @@
       <th>Listings Mapped</th>
       <th>Listings Unmapped</th>
       <th>% Listings Mapped</th>
+      <th>Works Mapped</th>
+      <th>Works Unmapped</th>
+      <th>% Works Mapped</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +20,14 @@
       <tr>
         <td><%= source.name %></td>
         <td><%= source.comments %></td>
-        <td><%= source.total_entries %></td>
-        <td><%= source.total_mapped_entries %></td>
-        <td><%= source.total_unmapped_entries %></td>
-        <td><%= source.percent_listings_mapped %></td>
+        <td class="text-right"><%= source.total_entries %></td>
+        <td class="text-right"><%= source.total_mapped_entries %></td>
+        <td class="text-right"><%= source.total_unmapped_entries %></td>
+        <td class="text-right"><%= source.percent_listings_mapped %></td>
+        <td class="text-right"><%= source.total_mapped_works %></td>
+        <td class="text-right"><%= source.total_unmapped_works %></td>
+        <td class="text-right"><%= source.percent_works_mapped %></td>
+        <td><%= link_to 'See unmapped', source_path(source) %></td>
       </td>
     <%end%>
   </tbody>
