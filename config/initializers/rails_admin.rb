@@ -50,6 +50,7 @@ RailsAdmin.config do |config|
   config.model 'Work' do
     list do
       field :name
+      field :composer
       field :url
       field :uri
       field :composer_uri

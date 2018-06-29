@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1 class="title">Proposals for <%= @composer %> and <%= @work %></h1>
+  <h1 class="title is-3 has-text-white">Proposals by using manual search </h1>
 
   <div class="row">
 
@@ -10,7 +10,7 @@
           <tr>
             <th>Composer</th>
             <th>Result</th>
-            <th></th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -18,8 +18,8 @@
             <tr>
       				<td><%= result.composer.name %></td>
       				<td><%= result.name %></td>
-              <td class="text-center">
-                <div class="btn btn-warning ">
+              <td>
+                <div class="btn btn-warning">
                     <%= link_to 'Create Mapping Key', listing_mappers_path(work_uri: result.uri, composer: @composer, work: @work, source_id: @source_id), method: :post, class: "btn" %>
                 </div>
               </td>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="col-md-2">
-      <%= render 'form' %>
+      <%= render 'proposals/form' %>
     </div>
   </div>
 

@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   resources :sources
   resources :proposals, only: :index
   resources :listing_mappers, only: :create
+
+  get 'search_work', to: 'works#search'
+
 end

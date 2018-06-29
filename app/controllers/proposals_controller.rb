@@ -6,13 +6,8 @@ class ProposalsController < ApplicationController
     @source_id = params[:source_id]
 
     @results = Work.includes(:composer).basic_search(@work + ' ' + @composer)
+    @listing_mapper = ListingMapper.new
 
-  end
-
- private
-
-  def set_listing
-    @listing = Listing.find(params[])
   end
 
 end
