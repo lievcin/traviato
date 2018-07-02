@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627184033) do
+ActiveRecord::Schema.define(version: 20180702121603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180627184033) do
     t.string "country"
     t.text "wikipedia_text"
     t.text "aka"
+    t.index ["uri"], name: "index_composers_on_uri", unique: true
   end
 
   create_table "listing_mappers", force: :cascade do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180627184033) do
     t.integer "composer_id"
     t.text "wikipedia_text"
     t.text "aka"
+    t.string "work_type"
     t.index ["uri", "composer_uri"], name: "index_works_on_uri_and_composer_uri", unique: true
   end
 
