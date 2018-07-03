@@ -5,37 +5,23 @@ class Source < ActiveRecord::Base
   attr_accessor :count_entries
 
   def total_entries
-  	# listings.count
-
-    q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END)" +
+    q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END) " +
         "FROM listings l WHERE l.source_id = " + id.to_s
     ActiveRecord::Base.connection.execute(q)[0]["sum"]
   end
 
   def total_mapped_entries
-
-    # Listing.find_by_sql("SELECT *
-    #   FROM listings l INNER JOIN listing_mappers lm ON l.composer = lm.composer
-    #   AND l.work = lm.work AND l.source_id = lm.source_id WHERE l.source_id = " + id.to_s).count
-
-
-		q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END)" +
-			  "FROM listings l INNER JOIN listing_mappers lm ON l.composer = lm.composer " +
-			  "AND lower(l.work) = lower(lm.work) AND l.source_id = lm.source_id WHERE l.source_id = " + id.to_s
+		q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END) " +
+			  "FROM listings l INNER JOIN listing_mappers lm ON l.map_key = lm.map_key " +
+			  "WHERE l.source_id = " + id.to_s
     ActiveRecord::Base.connection.execute(q)[0]["sum"]
   end
 
   def total_unmapped_entries
-    q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END)" +
-        "FROM listings l LEFT JOIN listing_mappers lm ON l.composer = lm.composer " +
-        "AND lower(l.work) = lower(lm.work) AND l.source_id = lm.source_id WHERE lm.source_id IS NULL AND l.source_id = " + id.to_s
+    q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END) " +
+        "FROM listings l LEFT JOIN listing_mappers lm ON l.map_key = lm.map_key " +
+        "WHERE lm.source_id IS NULL AND l.source_id = " + id.to_s
     ActiveRecord::Base.connection.execute(q)[0]["sum"]
-
-
-		# Listing.find_by_sql("SELECT *
-		# 	FROM listings l LEFT JOIN listing_mappers lm ON l.composer = lm.composer
-		# 	AND l.work = lm.work AND l.source_id = lm.source_id
-		# 	WHERE lm.source_id IS NULL AND l.source_id = " + id.to_s).count
   end
 
   def percent_listings_mapped
@@ -44,14 +30,13 @@ class Source < ActiveRecord::Base
 
   def total_mapped_works
     Listing.find_by_sql("SELECT DISTINCT l.composer, l.work
-      FROM listings l INNER JOIN listing_mappers lm ON l.composer = lm.composer
-      AND lower(l.work) = lower(lm.work) AND l.source_id = lm.source_id AND l.source_id = " + id.to_s).count
+      FROM listings l INNER JOIN listing_mappers lm ON l.map_key = lm.map_key " +
+      "AND l.source_id = " + id.to_s).count
   end
 
   def total_unmapped_works
     Listing.find_by_sql("SELECT DISTINCT l.composer, l.work
-      FROM listings l LEFT JOIN listing_mappers lm ON l.composer = lm.composer
-      AND lower(l.work) = lower(lm.work) AND l.source_id = lm.source_id
+      FROM listings l LEFT JOIN listing_mappers lm ON l.map_key = lm.map_key
       WHERE lm.source_id IS NULL AND l.source_id = " + id.to_s).count
   end
 

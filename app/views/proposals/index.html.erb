@@ -16,7 +16,7 @@
         <tbody>
           <% @results.each do |result| %>
             <tr>
-      				<td><%= result.composer.name %></td>
+      				<td><%= result&.composer&.name %></td>
       				<td><%= result.name %></td>
               <td class="text-center">
                 <div class="btn btn-warning ">

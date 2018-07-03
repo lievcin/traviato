@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180702121603) do
+ActiveRecord::Schema.define(version: 20180702234338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20180702121603) do
     t.string "work_uri"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string "map_key"
+    t.index ["map_key"], name: "listing_mappers_map_key_index"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -45,6 +47,9 @@ ActiveRecord::Schema.define(version: 20180702121603) do
     t.string "additional_text"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string "map_key"
+    t.index ["map_key"], name: "listings_map_key_index"
+    t.index ["source_id"], name: "listings_source_id_index"
   end
 
   create_table "sources", force: :cascade do |t|
@@ -65,6 +70,9 @@ ActiveRecord::Schema.define(version: 20180702121603) do
     t.text "wikipedia_text"
     t.text "aka"
     t.string "work_type"
+    t.index "to_tsvector('english'::regconfig, (name)::text)", name: "works_to_tsvector_idx1", using: :gin
+    t.index "to_tsvector('english'::regconfig, aka)", name: "works_to_tsvector_idx", using: :gin
+    t.index "to_tsvector('english'::regconfig, wikipedia_text)", name: "works_to_tsvector_idx2", using: :gin
     t.index ["uri", "composer_uri"], name: "index_works_on_uri_and_composer_uri", unique: true
   end
 
