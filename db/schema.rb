@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180702234338) do
+ActiveRecord::Schema.define(version: 20180713092437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 20180702234338) do
   end
 
   create_table "listing_mappers", force: :cascade do |t|
-    t.integer "source_id"
     t.string "composer"
     t.string "work"
     t.string "work_uri"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.string "map_key"
+    t.index ["composer", "work"], name: "index_listing_mappers_on_composer_and_work", unique: true
     t.index ["map_key"], name: "listing_mappers_map_key_index"
   end
 

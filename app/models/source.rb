@@ -20,7 +20,7 @@ class Source < ActiveRecord::Base
   def total_unmapped_entries
     q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END) " +
         "FROM listings l LEFT JOIN listing_mappers lm ON l.map_key = lm.map_key " +
-        "WHERE lm.source_id IS NULL AND l.source_id = " + id.to_s
+        "WHERE lm.work_uri IS NULL AND l.source_id = " + id.to_s
     ActiveRecord::Base.connection.execute(q)[0]["sum"]
   end
 
@@ -37,7 +37,7 @@ class Source < ActiveRecord::Base
   def total_unmapped_works
     Listing.find_by_sql("SELECT DISTINCT l.composer, l.work
       FROM listings l LEFT JOIN listing_mappers lm ON l.map_key = lm.map_key
-      WHERE lm.source_id IS NULL AND l.source_id = " + id.to_s).count
+      WHERE lm.work_uri IS NULL AND l.source_id = " + id.to_s).count
   end
 
   def percent_works_mapped

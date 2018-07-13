@@ -1,16 +1,19 @@
 class ListingMappersController < ApplicationController
 
   def create
-    listing_mapper = ListingMapper.new(
-    												source_id: params[:source_id],
-    												composer: params[:composer],
-    												work: params[:work],
-    												work_uri: params[:work_uri],
-    												map_key: params[:composer].downcase + params[:work].downcase + params[:source_id].to_s
-    												)
+    source_id = params[:source_id]
+    listing_mapper = ListingMapper.new(listing_mappers_params)
+    listing_mapper.map_key = params[:composer].downcase + params[:work].downcase
+
 		if listing_mapper.save
-			redirect_to source_path(params[:source_id])
+			redirect_to source_path(source_id)
 		end
   end
+
+  private
+
+    def listing_mappers_params
+      params.permit(:composer, :work, :work_uri)
+    end
 
 end

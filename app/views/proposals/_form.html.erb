@@ -2,6 +2,7 @@
 	<%= hidden_field_tag :composer, @composer %>
 	<%= hidden_field_tag :work, @work %>
 	<%= hidden_field_tag :source_id, @source_id %>
+
 	<div class="form-group">
 	  <%= label_tag :q, 'Field' %>
 	  <%= select_tag :search_field, options_for_select([ "composer", "work" ], "work"), options={ class: 'form-control'} %>
@@ -12,4 +13,14 @@
 	</div>
 
   <%= submit_tag 'Search', class: 'btn btn-primary' %>
+<% end %>
+
+<br/>
+
+<%= form_tag(listing_mappers_path, method: 'post') do %>
+	<%= hidden_field_tag :composer, @composer %>
+	<%= hidden_field_tag :work, @work %>
+	<%= hidden_field_tag :source_id, @source_id %>
+	<%= hidden_field_tag :work_uri, 'W1' %>
+  <%= submit_tag 'Map as Unknown/Medley', class: 'btn btn-primary' %>
 <% end %>
