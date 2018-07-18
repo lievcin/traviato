@@ -22,5 +22,28 @@
 	<%= hidden_field_tag :work, @work %>
 	<%= hidden_field_tag :source_id, @source_id %>
 	<%= hidden_field_tag :work_uri, 'W1' %>
-  <%= submit_tag 'Map as Unknown/Medley', class: 'btn btn-primary' %>
+  <%= submit_tag 'Map as Unknown/Medley', class: 'btn btn-danger' %>
+<% end %>
+
+<br/>
+<br/>
+
+<%= form_for(@new_work) do |f| %>
+
+	<%= hidden_field_tag :listing_composer, @composer %>
+	<%= hidden_field_tag :listing_work, @work %>
+	<%= hidden_field_tag :source_id, @source_id %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, value: @work, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :composer %>
+    <%= f.text_field :composer, data: { autocomplete: autocomplete_composer_name_proposals_path }, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Save', class: 'btn btn-success' %>
+
 <% end %>

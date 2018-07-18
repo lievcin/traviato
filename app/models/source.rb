@@ -21,10 +21,11 @@ class Source < ActiveRecord::Base
     q = "SELECT SUM(CASE WHEN l.source_id IN (6, 11) THEN CAST(l.additional_text AS INT) ELSE 1 END) " +
         "FROM listings l LEFT JOIN listing_mappers lm ON l.map_key = lm.map_key " +
         "WHERE lm.work_uri IS NULL AND l.source_id = " + id.to_s
-    ActiveRecord::Base.connection.execute(q)[0]["sum"]
+    ActiveRecord::Base.connection.execute(q)[0]["sum"] || 0
   end
 
   def percent_listings_mapped
+    # binding.pry
   	100 * total_mapped_entries / ([total_mapped_entries + total_unmapped_entries, 1].max)
   end
 
