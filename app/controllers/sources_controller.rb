@@ -7,7 +7,8 @@ class SourcesController < ApplicationController
   end
 
   def show
-  	@listings = ActiveRecord::Base.connection.execute("SELECT l.source_id, l.composer, l.work, count(*) as count_entries
+  	@listings = ActiveRecord::Base.connection.execute("SELECT l.source_id, l.composer, l.work,
+      SUM(CASE WHEN l.source_id IN (6, 11, 14) THEN CAST(l.additional_text AS INT) ELSE 1 END) as count_entries
   		FROM listings l LEFT JOIN listing_mappers lm ON l.map_key = lm.map_key
   		WHERE lm.work_uri IS NULL AND l.source_id = " + params[:id].to_s + " GROUP BY l.source_id, l.composer, l.work ORDER BY 4 DESC")
   end

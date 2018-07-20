@@ -56,9 +56,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails_admin', '~> 1.3'
 gem 'textacular', '~> 5.0'
 gem 'bootstrap', '~> 4.1.1'
-gem 'neo4j', '~> 9.2.0'
-gem 'neo4j-rake_tasks'
-gem 'neography'
 
 gem 'autocomplete_rails'
 gem 'jquery-rails'
