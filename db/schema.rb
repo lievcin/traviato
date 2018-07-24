@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180713092437) do
+ActiveRecord::Schema.define(version: 20180724090046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
+  enable_extension "hstore"
 
   create_table "composers", force: :cascade do |t|
     t.string "name"
@@ -26,6 +28,9 @@ ActiveRecord::Schema.define(version: 20180713092437) do
     t.string "country"
     t.text "wikipedia_text"
     t.text "aka"
+    t.hstore "information"
+    t.integer "date_of_birth"
+    t.integer "date_of_death"
     t.index ["uri"], name: "index_composers_on_uri", unique: true
   end
 
@@ -70,6 +75,7 @@ ActiveRecord::Schema.define(version: 20180713092437) do
     t.text "wikipedia_text"
     t.text "aka"
     t.string "work_type"
+    t.hstore "information"
     t.index "to_tsvector('english'::regconfig, (name)::text)", name: "works_to_tsvector_idx1", using: :gin
     t.index "to_tsvector('english'::regconfig, aka)", name: "works_to_tsvector_idx", using: :gin
     t.index "to_tsvector('english'::regconfig, wikipedia_text)", name: "works_to_tsvector_idx2", using: :gin
