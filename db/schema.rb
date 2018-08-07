@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180724090046) do
+ActiveRecord::Schema.define(version: 20180731154756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20180724090046) do
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.string "map_key"
+    t.string "theatre"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.date "date_start"
+    t.date "date_end"
+    t.integer "performance_count"
     t.index ["map_key"], name: "listings_map_key_index"
     t.index ["source_id"], name: "listings_source_id_index"
   end
@@ -62,6 +69,23 @@ ActiveRecord::Schema.define(version: 20180724090046) do
     t.text "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "theatre_mapping", force: :cascade do |t|
+    t.string "name"
+    t.string "opera_america_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "venues", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "works", force: :cascade do |t|
@@ -76,6 +100,7 @@ ActiveRecord::Schema.define(version: 20180724090046) do
     t.text "aka"
     t.string "work_type"
     t.hstore "information"
+    t.integer "premiere_date"
     t.index "to_tsvector('english'::regconfig, (name)::text)", name: "works_to_tsvector_idx1", using: :gin
     t.index "to_tsvector('english'::regconfig, aka)", name: "works_to_tsvector_idx", using: :gin
     t.index "to_tsvector('english'::regconfig, wikipedia_text)", name: "works_to_tsvector_idx2", using: :gin

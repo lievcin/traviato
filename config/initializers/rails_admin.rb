@@ -35,6 +35,8 @@ RailsAdmin.config do |config|
     list do
       field :name
       field :country
+      field :date_of_birth
+      field :date_of_death
       field :url
       field :uri
       field :gender
@@ -51,6 +53,7 @@ RailsAdmin.config do |config|
     list do
       field :name
       field :composer
+      field :premiere_date
       field :url
       field :uri
       field :composer_uri
