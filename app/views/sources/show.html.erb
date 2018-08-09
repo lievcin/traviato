@@ -12,12 +12,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @listings.each do |listing| %>
+    <% @entries.each do |entry| %>
       <tr>
-				<td><%= listing["composer"] %></td>
-				<td><%= listing["work"] %></td>
-				<td class="text-right"><%= listing["count_entries"] %></td>
-        <td><%= link_to 'Get proposals', proposals_path(listing) %></td>
+				<td><%= entry["composer"] %></td>
+				<td><%= entry["work"] %></td>
+				<td class="text-right"><%= entry["count_entries"] %></td>
+        <td><%= link_to 'Get proposals', proposals_path(entry) %></td>
       </td>
     <%end%>
   </tbody>

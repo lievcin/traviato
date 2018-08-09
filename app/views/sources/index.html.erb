@@ -1,14 +1,14 @@
-<h1 class="title is-3 has-text-white">Listing sources</h1>
+<h1 class="title is-3 has-text-white"><%= @content.camelize %> sources</h1>
 
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
       <th>Name</th>
       <th>Comments</th>
-      <th>Total Listings</th>
-      <th>Listings Mapped</th>
-      <th>Listings Unmapped</th>
-      <th>% Listings Mapped</th>
+      <th>Total <%= @content.camelize %></th>
+      <th><%= @content.camelize %> Mapped</th>
+      <th><%= @content.camelize %> Unmapped</th>
+      <th>% <%= @content.camelize %> Mapped</th>
       <th>Works Mapped</th>
       <th>Works Unmapped</th>
       <th>% Works Mapped</th>

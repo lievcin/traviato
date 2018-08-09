@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   get 'search_work', to: 'works#search'
   get 'link_from_df', to: 'listing_mappers#create'
 
+  root to: 'home#index'
+
 end

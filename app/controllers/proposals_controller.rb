@@ -1,6 +1,6 @@
 class ProposalsController < ApplicationController
 
-	autocomplete :composer, :name, full_search: :true
+  autocomplete :composer, :name, full_search: :true
 
   def index
     @composer = params[:composer]
