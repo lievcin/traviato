@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731154756) do
+ActiveRecord::Schema.define(version: 20180808203628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,18 +64,37 @@ ActiveRecord::Schema.define(version: 20180731154756) do
     t.index ["source_id"], name: "listings_source_id_index"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.string "work"
+    t.string "composer"
+    t.string "theatre"
+    t.date "review_date"
+    t.text "full_text"
+    t.integer "rating"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string "url"
+    t.decimal "sentiment_score"
+    t.decimal "sentiment_magnitude"
+    t.string "map_key"
+    t.integer "source_id"
+    t.index ["source_id"], name: "index_reviews_on_source_id"
+  end
+
   create_table "sources", force: :cascade do |t|
     t.string "name"
     t.text "comments"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string "content"
   end
 
   create_table "theatre_mapping", force: :cascade do |t|
     t.string "name"
     t.string "opera_america_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "venues", force: :cascade do |t|
